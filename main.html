@@ -1,0 +1,48 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>쌍자치환</title>
+    	<style>
+            div.absolute {
+                width: auto;
+                height: auto;
+                position: absolute;
+                top: 150px;
+                right: 550px;
+            }
+            img {
+                width: 200px;
+                border-radius: 17px;
+                -moz-border-radius: 280px;
+                -khtml-border-radius: 280px; 
+                -webkit-border-radius: 280px; 
+                display: block;
+                margin: 0px auto;
+                margin-top: 300px;
+            }
+            input{
+                height: 30px;
+                width: 300px;
+            }
+            span{
+                font-family: 'Balsamiq Sans', cursive;
+                font-size:30px;
+                white-space: nowrap;
+                margin: 0px 30px;
+            }
+        </style>
+        <script src = "encryptionAll.js"></script>
+    </head>
+
+    <body>
+        <div class="absolute">
+            <span>Keyword</span> <input type="text" style="margin-left: 2px;" title="암호키를 입력하세요" id="keyword"/> <br><br>
+            <span>Plaintext</span> <input type="text" title="암호화하고 싶은 문자를 입력하세요" id="plaintext"/><br>    
+        </div>
+        <a href="ciphertext.html">
+            <img src="보안이미지.jpg" onclick="getValue()"/>
+        </a>
+    </body>
+</html>

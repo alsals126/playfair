@@ -1,0 +1,100 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>쌍자치환</title>
+    	<style>
+            input[type="text"]{
+                height: 30px;
+                width: 300px;
+                margin-top: 30px;
+                border-left-width:0;
+                border-right-width:0;
+                border-top-width:0;
+                border-bottom-width:1;
+                border-bottom:1 solid #FF0000;
+            }
+            table {
+                width: auto;
+                height: auto;
+                position: absolute;
+                top: 180px;
+                left: 350px;
+            }
+            p{
+                font-family: 'Balsamiq Sans', cursive;
+                font-size:30px;
+                margin-top: 150px;
+            }
+            span{
+                font-family: 'Balsamiq Sans', cursive;
+                font-size:30px;
+                white-space: nowrap;
+                margin: 0px 30px;
+            }
+            table td{
+                font-family: 'Nanum Gothic', sans-serif;
+                text-align: center;
+                font-size: 30px;
+                width: 50px;
+                height: 50px;
+            }
+            div.absolute {
+                width: auto;
+                height: auto;
+                position: absolute;
+                top: 210px;
+                right: 300px;
+            }
+        </style>
+        <script src = "encryptionAll.js"></script>
+    </head>
+
+    <body>
+        <table border="1">
+            <tr>
+                <td>Q/Z</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="absolute">
+            <span>Pair text</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="txt" readonly/><br>
+            <span>ciphertext</span> &nbsp;&nbsp;<input type="text" id="txt" readonly/><br>
+            <span>decryption</span> <input type="text" id="txt"/><br>
+        </div>
+    </body>
+</html>

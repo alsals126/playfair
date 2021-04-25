@@ -1,0 +1,41 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>쌍자치환</title>
+    	<style>
+            input[type="text"]{
+                height: 30px;
+                width: 300px;
+                margin-top: 30px;
+                border-left-width:0;
+                border-right-width:0;
+                border-top-width:0;
+                border-bottom-width:1;
+                border-bottom:1 solid #FF0000;
+            }
+            input[type="button"]{
+                height: 30px;
+                width: 80px;
+                margin: 20px 15px;
+            }
+            p{
+                font-family: 'Balsamiq Sans', cursive;
+                font-size:30px;
+                margin-top: 150px;
+                text-align: center;
+            }
+        </style>
+        <script src = "encryptionAll.js"></script>
+    </head>
+
+    <body>
+        <p>
+            ciphertext<br>
+            <input type="text" id="txt" readonly onclick="encryption()"/><br>
+            <input type="button" value="처음으로" onclick="location.href = 'main.html'"/>
+            <input type="button" value="자세히보기" onclick="location.href = 'detail.html'"/>
+        </p>
+    </body>
+</html>
