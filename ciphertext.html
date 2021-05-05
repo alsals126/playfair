@@ -34,8 +34,9 @@
         <script src = "encryptionAll.js"></script>
         <script>
             window.onload=function(){
-                document.querySelector('input[id=as]').value = encryption();
-                document.querySelector('input[id=as]').setAttribute('size', encryption().length+10);
+                var e = encryption();
+                document.querySelector('input[id=as]').value = e;
+                document.querySelector('input[id=as]').setAttribute('size', e.length+10);
             }
         </script>
     </head>

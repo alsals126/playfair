@@ -51,46 +51,23 @@
             }
         </style>
         <script src = "encryptionAll.js"></script>
+        <script>
+            getBoard()
+            document.write('<table border="1">');
+            for (let i = 0; i < 5; i++) {
+                document.write('<tr>');
+                for (let j = 0; j < 5; j++)  {
+                    document.write('<td>');
+                    document.write(i + ", " + j);
+                    document.write('</td>');
+                }
+                document.write('</tr>')
+            }
+            document.write('</table>');
+        </script>
     </head>
 
     <body>
-        <table border="1">
-            <tr>
-                <td>Q/Z</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
         <div class="absolute">
             <span>Pair text</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly/><br>
             <span>ciphertext</span> &nbsp;&nbsp;<input type="text" readonly/><br>

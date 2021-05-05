@@ -1,7 +1,7 @@
-var keyword = ""    //암호화에 쓰일 키
+//var keyword = ""    //암호화에 쓰일 키
 var plaintext = ""  //암호화 할 문자열
 
-function getValue()  { // 암호화에 쓰일 키, 암호화 할 문자열 가져오기
+function setValue()  { // 암호화에 쓰일 키, 암호화 할 문자열 가져오기
   localStorage.setItem('keyword', document.getElementById('keyword').value)
   localStorage.setItem('plaintext', document.getElementById('plaintext').value)
 }
@@ -103,5 +103,9 @@ function setBoard(key){ //암호화에 쓰일 암호판 세팅
     }
   }
 
+  return alphabetBoard
+}
+
+function getBoard(){
   return alphabetBoard
 }
