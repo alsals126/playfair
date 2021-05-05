@@ -6,9 +6,9 @@
         <title>쌍자치환</title>
     	<style>
             input[type="text"]{
+                min-width: 500px;
                 height: 30px;
-                width: 300px;
-                margin-top: 30px;
+                margin-top: 40px;
                 border-left-width:0;
                 border-right-width:0;
                 border-top-width:0;
@@ -27,13 +27,16 @@
             p{
                 font-family: 'Balsamiq Sans', cursive;
                 font-size:30px;
-                margin-top: 150px;
+                margin-top: 200px;
                 text-align: center;
             }
         </style>
         <script src = "encryptionAll.js"></script>
         <script>
-            window.onload=function(){document.querySelector('input[id=as]').value = encryption()}
+            window.onload=function(){
+                document.querySelector('input[id=as]').value = encryption();
+                document.querySelector('input[id=as]').setAttribute('size', encryption().length+10);
+            }
         </script>
     </head>
 
