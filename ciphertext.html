@@ -14,6 +14,10 @@
                 border-top-width:0;
                 border-bottom-width:1;
                 border-bottom:1 solid #FF0000;
+
+                font-size:30px;
+                text-align: center;
+                color: #202020
             }
             input[type="button"]{
                 height: 30px;
@@ -28,12 +32,15 @@
             }
         </style>
         <script src = "encryptionAll.js"></script>
+        <script>
+            window.onload=function(){document.querySelector('input[id=as]').value = encryption()}
+        </script>
     </head>
 
     <body>
         <p>
             ciphertext<br>
-            <input type="text" id="txt" readonly onclick="encryption()"/><br>
+            <input type="text" id="as" value="" readonly/><br>
             <input type="button" value="처음으로" onclick="location.href = 'main.html'"/>
             <input type="button" value="자세히보기" onclick="location.href = 'detail.html'"/>
         </p>
