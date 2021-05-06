@@ -1,8 +1,9 @@
-//var keyword = ""    //암호화에 쓰일 키
-var plaintext = ""  //암호화 할 문자열
+var keyword = ""
+var plaintext = ""
 
 function setValue()  { // 암호화에 쓰일 키, 암호화 할 문자열 가져오기
   localStorage.setItem('keyword', document.getElementById('keyword').value)
+  console.log(document.getElementById('keyword').value)
   localStorage.setItem('plaintext', document.getElementById('plaintext').value)
 }
 
@@ -11,6 +12,7 @@ function encryption(){
   var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   var keyForSet = deduplication(localStorage.getItem('keyword').toUpperCase() + alphabet) //중복된 문자가 제거된 문자열을 저장할 변수
   const alphabetBoard = setBoard(keyForSet) 
+  localStorage.setItem('board', alphabetBoard)
 
   // 키
   plaintext = localStorage.getItem('plaintext').replace(/ /g,"").toUpperCase() //공백제거 + 대문자로 치환
@@ -37,7 +39,9 @@ function encryption(){
     }
 		playFair.push(temArr)
   }
+  localStorage.setItem('pairtext', playFair.join(' ').replace(/,/g,""))
 
+  // 암호화
   for(var i = 0 ; i < playFair.length; i++ ) {
     var temArr = new Array(2)
     for( var j = 0 ; j < alphabetBoard.length ; j++ ) { //쌍자암호의 각각 위치체크
@@ -58,7 +62,7 @@ function encryption(){
       temArr[1] = alphabetBoard[x2][(y2+1)%5];
     }
     else if(y1==y2) {//열이 같은 경우
-      tmpArr[0] = alphabetBoard[(x1+1)%5][y1];
+      temArr[0] = alphabetBoard[(x1+1)%5][y1];
       temArr[1] = alphabetBoard[(x2+1)%5][y2];
     } 
     else { //행, 열 모두 다른경우
@@ -69,14 +73,10 @@ function encryption(){
     encPlayFair.push(temArr)  
   }
 
-  console.log(playFair)
-  console.log(playFair.join('').replace(/,/g,"")) 
+  localStorage.setItem('encPlayText', encPlayFair.join(' ').replace(/,/g,""))
 
-  console.log(encPlayFair)
-  console.log(encPlayFair.join('').replace(/,/g,"")) 
-  
-  console.log(keyForSet) 
-  console.log(plaintext) 
+  var decry = decryption(localStorage.getItem('keyword').toUpperCase, encPlayFair.join('').replace(/,/g,""), alphabetBoard)
+  localStorage.setItem('decryText', decry)
 
   return encPlayFair.join('').replace(/,/g,"")
 }
@@ -107,5 +107,100 @@ function setBoard(key){ //암호화에 쓰일 암호판 세팅
 }
 
 function getBoard(){
-  return alphabetBoard
+  return localStorage.getItem('board').replace(/,/g,"")
+}
+
+function getPairtext(){
+  return localStorage.getItem('pairtext')  
+}
+
+function getEncPlayFair(){
+  return localStorage.getItem('encPlayText')  
+}
+
+function decryption(key, str, alphabetBoard){
+  var playFair = new Array()
+	var decPlayFair = new Array() 
+	var x1=0, x2=0, y1=0, y2=0
+	var decStr =""
+
+	var lengthOddFlag = 1
+		
+	for( var i = 0 ; i < str.length; i+=2 ) {
+    var temArr = new Array(2)
+		temArr[0] = str.charAt(i);
+		temArr[1] = str.charAt(i+1);
+		playFair.push(temArr);
+	}
+		
+	for(var i = 0 ; i < playFair.length ; i++ ) {
+    var temArr = new Array(2)
+		for( var j = 0 ; j < alphabetBoard.length ; j++ ) {
+			for( var k = 0 ; k < alphabetBoard[j].length ; k++ ) {
+				if(alphabetBoard[j][k] == playFair[i][0]) {
+          x1 = j;
+          y1 = k;
+        }
+        if(alphabetBoard[j][k] == playFair[i][1]) {
+          x2 = j;
+          y2 = k;
+        }
+			}
+		}
+			
+		if(x1==x2) //행이 같은 경우 각각 바로 아래열 대입
+		{
+			temArr[0] = alphabetBoard[x1][(y1+4)%5];
+			temArr[1] = alphabetBoard[x2][(y2+4)%5];
+		}
+		else if(y1==y2) //열이 같은 경우 각각 바로 옆 열 대입
+		{
+			temArr[0] = alphabetBoard[(x1+4)%5][y1];
+			temArr[1] = alphabetBoard[(x2+4)%5][y2];
+		}
+		else //행, 열 다른경우 각자 대각선에 있는 곳.
+		{
+			temArr[0] = alphabetBoard[x2][y1];
+			temArr[1] = alphabetBoard[x1][y2];
+		}
+		decPlayFair.push(temArr);
+	}
+		
+	for(var i = 0 ; i < decPlayFair.length ; i++) //중복 문자열 돌려놓음
+	{
+		if(i!=decPlayFair.length-1 && decPlayFair[i][1]=='X' 
+				&& decPlayFair[i][0]==decPlayFair[i+1][0])
+		{	
+	  	decStr += decPlayFair[i][0];
+		}
+		else {
+      decStr += decPlayFair[i][0]+""+decPlayFair[i][1];
+		}
+	}
+
+  var str = localStorage.getItem('plaintext').replace(/ /g,"").toUpperCase()
+  var arr = new Array()
+
+  // z위치 찾기
+  for(var i=0; i<str.length; i++){
+    if(str.charAt(i) == 'Z'){
+      arr.push(i)
+    }
+  }
+
+	for(var i = 0 ; i < decStr.length ; i++ )
+	{
+    for(var j=0; j<arr.length; j++){
+      if(i == arr[j]) 
+			  decStr = decStr.substring(0,i)+'Z'+decStr.substring(i+1,decStr.length);
+		}
+    }
+		
+  if(str.length %2 == 0) decStr = decStr.substring(0,decStr.length-1);
+		
+  return decStr;
+}
+
+function getdecry(){
+  return localStorage.getItem('decryText')  
 }

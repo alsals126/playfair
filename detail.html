@@ -2,6 +2,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <html>
     <head>
         <meta charset="UTF-8">
@@ -16,6 +18,9 @@
                 border-top-width:0;
                 border-bottom-width:1;
                 border-bottom:1 solid #FF0000;
+
+                font-family: 'Montserrat', sans-serif;
+                font-size: 20px;
             }
             table {
                 width: auto;
@@ -52,26 +57,39 @@
         </style>
         <script src = "encryptionAll.js"></script>
         <script>
-            getBoard()
+            //테이블 만들기
+            var board = getBoard();
             document.write('<table border="1">');
+            var count = 0;
             for (let i = 0; i < 5; i++) {
                 document.write('<tr>');
                 for (let j = 0; j < 5; j++)  {
                     document.write('<td>');
-                    document.write(i + ", " + j);
+                    if(board.charAt(count)=='Q'){
+                        document.write(board.charAt(count++)+'/Z');
+                    }else{
+                        document.write(board.charAt(count++));
+                    }
                     document.write('</td>');
                 }
                 document.write('</tr>')
             }
             document.write('</table>');
+
+            // 값 출력
+            window.onload = function(){
+                document.querySelector('input[id=pairTXT]').value = getPairtext();
+                document.querySelector('input[id=cipherTXT]').value = getEncPlayFair();
+                document.querySelector('input[id=decryptionTXT]').value = getdecry();
+            }            
         </script>
     </head>
 
     <body>
         <div class="absolute">
-            <span>Pair text</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" readonly/><br>
-            <span>ciphertext</span> &nbsp;&nbsp;<input type="text" readonly/><br>
-            <span>decryption</span> <input type="text" readonly/><br>
+            <span>Pair text</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="pairTXT" value=" " title="평문 2:2 맵핑" readonly/><br>
+            <span>ciphertext</span> &nbsp;&nbsp;<input type="text" id="cipherTXT" value=" " title="암호화 문장" readonly/><br>
+            <span>decryption</span> <input type="text" id="decryptionTXT" value=" " title="복호화 문장" readonly/><br>
         </div>
     </body>
 </html>
