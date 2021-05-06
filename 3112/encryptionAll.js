@@ -3,7 +3,6 @@ var plaintext = ""
 
 function setValue()  { // 암호화에 쓰일 키, 암호화 할 문자열 가져오기
   localStorage.setItem('keyword', document.getElementById('keyword').value)
-  console.log(document.getElementById('keyword').value)
   localStorage.setItem('plaintext', document.getElementById('plaintext').value)
 }
 
@@ -178,25 +177,43 @@ function decryption(key, str, alphabetBoard){
 		}
 	}
 
-  var str = localStorage.getItem('plaintext').replace(/ /g,"").toUpperCase()
-  var arr = new Array()
+  var plainStr = localStorage.getItem('plaintext').toUpperCase()
+  var arr1 = new Array()
+  var arr2 = new Array()
 
   // z위치 찾기
-  for(var i=0; i<str.length; i++){
-    if(str.charAt(i) == 'Z'){
-      arr.push(i)
+  for(var i=0; i<plainStr.length; i++){
+    if(plainStr.charAt(i) == 'Z'){
+      arr1.push(i)
     }
   }
 
+  // 공백위치 찾기
+  for(var i=0; i<plainStr.length; i++){
+    if(plainStr.charAt(i) == ' '){
+      arr2.push(i)
+    }
+  }
+
+  // Z로 바꾸기
 	for(var i = 0 ; i < decStr.length ; i++ )
 	{
-    for(var j=0; j<arr.length; j++){
-      if(i == arr[j]) 
+    for(var j=0; j<arr1.length; j++){
+      if(i == arr1[j]) 
 			  decStr = decStr.substring(0,i)+'Z'+decStr.substring(i+1,decStr.length);
 		}
-    }
-		
-  if(str.length %2 == 0) decStr = decStr.substring(0,decStr.length-1);
+  }
+
+  if(str.length %2 != 0) decStr = decStr.substring(0, decStr.length-1); 
+
+  // 공백 추가
+  for(var i = 0 ; i < decStr.length ; i++ )
+	{
+    for(var j=0; j<arr2.length; j++){
+      if(i == arr2[j]) 
+			  decStr = decStr.substring(0,i)+' '+decStr.substring(i,decStr.length);
+		}
+  }
 		
   return decStr;
 }
